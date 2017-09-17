@@ -73,7 +73,7 @@ void BasicEnt::Update(float dt)
 
 void BasicEnt::Draw(sf::RenderWindow* rw)
 {
-	GetGraphic().GetSprPntr()->setPosition(GetPosition()._X , GetPosition()._Y);
+	GetGraphic().GetSprPntr()->setPosition(floor(GetPosition()._X) , floor(GetPosition()._Y));
 	rw->draw(*GetGraphic().GetSprPntr());
 };
 
@@ -96,7 +96,7 @@ void SFXEnt::Update(float dt)
 
 AABB GenBoundBox(Entity* ent)
 {
-	return AABB(ent->GetPosition()._X, ent->GetPosition()._Y, ent->GetSize()._X, ent->GetSize()._Y);
+	return AABB((int)ent->GetPosition()._X, (int)ent->GetPosition()._Y, (int)ent->GetSize()._X, (int)ent->GetSize()._Y);
 };
 
 /////
