@@ -8,19 +8,20 @@ Player::Player(Level* lvl) : Entity(lvl)
 
 void Player::Update(float dt)
 {
+	float WalkSpeed = 100.f;
+	float Jump = 100.f;
+
+	GetVelocity()._Y += dt * Gravity;
+
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::A)) && (!sf::Keyboard::isKeyPressed(sf::Keyboard::D)))
-		GetVelocity()._X = -100.f;
+		GetVelocity()._X = -WalkSpeed;
 	else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::D)) && (!sf::Keyboard::isKeyPressed(sf::Keyboard::A)))
-		GetVelocity()._X = 100.f;
+		GetVelocity()._X = WalkSpeed;
 	else
 		GetVelocity()._X = 0.f;
 
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && (!sf::Keyboard::isKeyPressed(sf::Keyboard::S)))
-		GetVelocity()._Y = -100.f;
-	else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::S)) && (!sf::Keyboard::isKeyPressed(sf::Keyboard::W)))
-		GetVelocity()._Y = 100.f;
-	else
-		GetVelocity()._Y = 0.f;
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && (GetVelocity()._Y == dt * Gravity))
+		GetVelocity()._Y = -Jump;
 
 	AABB bounds = GenBoundBox(this);
 	//	Resolve x-coordinate movement

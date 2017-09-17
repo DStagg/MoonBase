@@ -7,6 +7,7 @@
 
 #define CellWidth 32
 #define CellHeight 32
+#define Gravity 50.f
 
 class Map
 {

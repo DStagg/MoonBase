@@ -40,6 +40,15 @@ void MainScene::Update(float dt)
 			SetRunning(false);
 		else if ((Event.type == sf::Event::MouseButtonPressed) && (Event.mouseButton.button == sf::Mouse::Left))
 			_Level->GetPlayer()->GetPosition().Set(sf::Mouse::getPosition(*_Window).x, sf::Mouse::getPosition(*_Window).y);
+		else if ((Event.type == sf::Event::MouseButtonPressed) && (Event.mouseButton.button == sf::Mouse::Right))
+		{
+			int col = _Level->GetMap().CalcCol(sf::Mouse::getPosition(*_Window).x);
+			int row = _Level->GetMap().CalcRow(sf::Mouse::getPosition(*_Window).y);
+			if (_Level->GetMap().GetTiles().GetCell(col, row) == 0)
+				_Level->GetMap().GetTiles().SetCell(col, row, 1);
+			else
+				_Level->GetMap().GetTiles().SetCell(col, row, 0);
+		}
 				
 	}
 
