@@ -8,8 +8,6 @@ If the player kills all of the robots they win. If the target object is destroye
 The player can switch weapons, regain health, use terrain/equipment and buy upgrades/supplies between waves.
 ----------------
 Prototype - basic implementation of core features
-- Move player (basic WASD)
-- Collide player with tiles - basic
 - Gravity
 - Player walks side to side, collides with tiles and drops through gaps
 - Player jumps, collides with ceiling/floor tiles

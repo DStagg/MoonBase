@@ -15,6 +15,13 @@ void Player::Update(float dt)
 	else
 		GetVelocity()._X = 0.f;
 
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && (!sf::Keyboard::isKeyPressed(sf::Keyboard::S)))
+		GetVelocity()._Y = -100.f;
+	else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::S)) && (!sf::Keyboard::isKeyPressed(sf::Keyboard::W)))
+		GetVelocity()._Y = 100.f;
+	else
+		GetVelocity()._Y = 0.f;
+
 	AABB bounds = GenBoundBox(this);
 	//	Resolve x-coordinate movement
 	if (GetVelocity()._X != 0.f)
@@ -73,7 +80,65 @@ void Player::Update(float dt)
 		}
 		else
 			GetPosition()._X += dt * GetVelocity()._X;
+	}
+	bounds = GenBoundBox(this);
+	//	Resolve y-coordinate movement
+	if (GetVelocity()._Y != 0.f)
+	{
+		int forwardY = (GetVelocity()._Y < 0.f) ? bounds._Y : bounds.Bottom();
+		int movedY = (int)(GetPosition()._Y + (dt * GetVelocity()._Y));
+		if (GetVelocity()._Y > 0.f) movedY += (int)(GetSize()._Y - 1.f);
+		int forwardRow = GetLevel()->GetMap().CalcRow(forwardY);
+		int movedRow = GetLevel()->GetMap().CalcRow(movedY);
+		int leftCol = GetLevel()->GetMap().CalcCol(bounds._X);
+		int rightCol = GetLevel()->GetMap().CalcCol(bounds.Right());
 
+		if (forwardRow != movedRow)
+		{
+			int blockedRow = -1;
+			if (GetVelocity()._Y < 0.f)
+			{
+				for (int row = forwardRow; row >= movedRow; row--)
+					for (int col = leftCol; col <= rightCol; col++)
+					{
+						if (blockedRow != -1)
+							break;
+						if (GetLevel()->GetMap().GetTiles().GetCell(col, row) == 1)
+						{
+							blockedRow = row;
+							break;
+						}
+					}
+			}
+			else
+			{
+				for (int row = forwardRow; row <= movedRow; row++)
+					for (int col = leftCol; col <= rightCol; col++)
+					{
+						if (blockedRow != -1)
+							break;
+						if (GetLevel()->GetMap().GetTiles().GetCell(col, row) == 1)
+						{
+							blockedRow = row;
+							break;
+						}
+					}
+
+			}
+
+			if (blockedRow == -1)
+				GetPosition()._Y += dt * GetVelocity()._Y;
+			else
+			{
+				if (GetVelocity()._Y < 0.f)
+					GetPosition()._Y = (float)((blockedRow + 1) * CellHeight);
+				else
+					GetPosition()._Y = ((float)(blockedRow * CellHeight) - GetSize()._Y);
+				GetVelocity()._Y = 0.f;
+			}
+		}
+		else
+			GetPosition()._Y += dt * GetVelocity()._Y;
 	}
 };
 
