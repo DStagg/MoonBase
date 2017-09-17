@@ -4,6 +4,9 @@
 #include <SFML\Graphics.hpp>
 #include "Framework/Scene.h"
 
+#include "Level.h"
+#include "Player.h"
+
 class MainScene : public Scene
 {
 public:
@@ -20,7 +23,8 @@ public:
 
 private:
 
-	sf::RenderWindow* _Window;
+	sf::RenderWindow* _Window = 0;
+	Level* _Level = 0;
 
 };
 
