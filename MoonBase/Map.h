@@ -3,6 +3,7 @@
 
 #include "Framework\Data\Grid.h"
 #include "SFML\Graphics.hpp"
+#include "Framework\Data\Pair.h"
 
 #define CellWidth 32
 #define CellHeight 32
@@ -12,6 +13,9 @@ class Map
 public:
 
 	Grid& GetTiles();
+
+	int CalcCol(int worldx);
+	int CalcRow(int worldy);
 
 
 private:

@@ -38,6 +38,8 @@ void MainScene::Update(float dt)
 			SetRunning(false);
 		if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
 			SetRunning(false);
+		else if ((Event.type == sf::Event::MouseButtonPressed) && (Event.mouseButton.button == sf::Mouse::Left))
+			_Level->GetPlayer()->GetPosition().Set(sf::Mouse::getPosition(*_Window).x, sf::Mouse::getPosition(*_Window).y);
 				
 	}
 
