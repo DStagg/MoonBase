@@ -169,7 +169,7 @@ Entity* EntList::GetEnt(int i)
 void DebugDrawEntity(Entity* ent, sf::RenderWindow* target, sf::Color col)
 {
 	sf::RectangleShape rect;
-	rect.setPosition(ent->GetPosition()._X, ent->GetPosition()._Y);
+	rect.setPosition(floor(ent->GetPosition()._X), floor(ent->GetPosition()._Y));
 	rect.setFillColor(sf::Color(0, 0, 0, 0));
 	rect.setOutlineColor(col);
 	rect.setOutlineThickness(1.f);
