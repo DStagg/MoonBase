@@ -15,6 +15,7 @@ void MainScene::Begin()
 	_Level->SetPlayer(new Player(_Level));
 	_Level->GetPlayer()->GetSize().Set(32.f, 64.f);
 	_Level->GetPlayer()->GetPosition().Set(100.f, 200.f);
+	DebugGenMap(&_Level->GetMap(), 20, 10);
 };
 void MainScene::End()
 {
@@ -45,6 +46,9 @@ void MainScene::Update(float dt)
 };
 void MainScene::DrawScreen()
 {
+	if (_Level != 0)
+		DebugDrawMap(&_Level->GetMap(), _Window, sf::Color::Magenta);
+
 	if ((_Level != 0) && (_Level->GetPlayer() != 0))
 		DebugDrawEntity(_Level->GetPlayer(), _Window, sf::Color::Blue);
 };

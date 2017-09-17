@@ -8,7 +8,6 @@ If the player kills all of the robots they win. If the target object is destroye
 The player can switch weapons, regain health, use terrain/equipment and buy upgrades/supplies between waves.
 ----------------
 Prototype - basic implementation of core features
-- Show map tiles on screen (only feature: solid bool)
 - Move player (basic WASD)
 - Collide player with tiles - basic
 - Gravity
@@ -41,6 +40,7 @@ Prototype - basic implementation of core features
 - Destroy enemy when health reaches 0
 - Show win screen when enemy is dead
 Alpha - MVP. Could release as a complete, albeit v. basic 1-level game.
+- Add slopes
 - Player can crouch
 - Player can crawl
 - Player has grenades

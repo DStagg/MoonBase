@@ -14,3 +14,8 @@ Player* Level::GetPlayer()
 {
 	return _Player;
 };
+
+Map& Level::GetMap()
+{
+	return _Map;
+};
