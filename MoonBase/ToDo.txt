@@ -1,0 +1,66 @@
+Moon Base Defence
+----------------
+2D Platformer where a lone space marine fights off hordes of robots trying to blow up the research base.
+----------------
+The player plays as a space marine. They have basic 2D platforming movement (walk, jump, crouch) and can shoot a gun (up, down, left, right, diagonal).
+They are defending a research base on a moon. Robots of varying types will spawn in waves and attempt to destroy a target object in the base.
+If the player kills all of the robots they win. If the target object is destroyed they lose.
+The player can switch weapons, regain health, use terrain/equipment and buy upgrades/supplies between waves.
+----------------
+Prototype - basic implementation of core features
+- Show player on screen
+- Show map tiles on screen (only feature: solid bool)
+- Move player (basic WASD)
+- Collide player with tiles - basic
+- Gravity
+- Player walks side to side, collides with tiles and drops through gaps
+- Player jumps, collides with ceiling/floor tiles
+- Player collides with walls while jumping
+- Player tracks state (LookLeft, WalkLeft, RunLeft, CrouchLeft, FallLeft, etc.)
+- Show gun on screen
+- Move gun with player
+- Aim gun
+- Fire bullets from gun
+- Kill bullets on count limit
+- Kill bullets on lifespan
+- Kill bullets on tile-collide
+- Show target object on screen
+- Show target object health on GUI
+- Show player health on GUI
+- Show enemy on screen
+- Collide enemy with tiles
+- Give enemy basic walker AI (e.g. goomba)
+- Generate path to target object w/ djestkra (or whatever it's called)
+- Add debug option to draw djestkra path
+- Make enemy navigate to target object
+- Make enemy attack target object once close enough
+- Make target object health decrease
+- Show gameover screen on target object health reaching 0
+- Collide bullets with enemy
+- Track enemy health
+- Decrease enemy health when hit
+- Destroy enemy when health reaches 0
+- Show win screen when enemy is dead
+Alpha - MVP. Could release as a complete, albeit v. basic 1-level game.
+- Player can crouch
+- Player can crawl
+- Player has grenades
+- Show remaining grenades on GUI
+- Player can throw grenades
+- Grenades collide with terrain
+- Grenades explode
+- Grenades decrease enemy health in a set radius
+- Animated sprites for each player state
+- Animated gun sprite
+- Map tile sprites
+- Map save/load
+- Map editor mode
+- Destroying enemies provides a reward - points to start with.
+- Add crawler enemy - e.g. those spiny things from Metroid
+Beta - Advanced features and multiple levels.
+- Player can grab ledges and pull themselves up
+Complete - polish, polish, polish.
+
+Wish List
+ - Randomise enemy health/dmg within a small margin
+ - Rare chance of "Elite" enemies spawning - greater damage/health/reward
