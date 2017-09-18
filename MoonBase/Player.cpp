@@ -50,35 +50,35 @@ void Player::Update(float dt)
 	if (keyDown(W) && (GetLevel()->GetMap().GetTileFromWorld(GetPosition()._X + (GetSize()._X / 2.f),GetPosition()._Y + GetSize()._Y) == 1))
 		GetVelocity()._Y = -Jump;
 	
-	//	Update physics
-	GetVelocity()._Y += dt * Gravity;
-	GetLevel()->GetMap().ResolveTileCollision(this, dt);
-
-	if ((GetGun()->_Aim == Aim::Up) && (!sf::Keyboard::isKeyPressed(sf::Keyboard::Up)))
+	if ((GetGun()->_Aim == Aim::Up) && (!keyDown(Up)))
 		GetGun()->_Aim = Aim::Neutral;
-	else if ((GetGun()->_Aim == Aim::Down) && (!sf::Keyboard::isKeyPressed(sf::Keyboard::Down)))
+	else if ((GetGun()->_Aim == Aim::Down) && (!keyDown(Down)))
 		GetGun()->_Aim = Aim::Neutral;
 	else if (GetGun()->_Aim == Aim::Neutral)
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+		if (keyDown(LShift))
 			GetGun()->_Aim = Aim::DiagUp;
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		else if (keyDown(Up))
 			GetGun()->_Aim = Aim::Up;
 	}
 	else if (GetGun()->_Aim == Aim::DiagUp)
 	{
-		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+		if (!keyDown(LShift))
 			GetGun()->_Aim = Aim::Neutral;
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		else if (keyDown(Down))
 			GetGun()->_Aim = Aim::DiagDown;
 	}
 	else if (GetGun()->_Aim == Aim::DiagDown)
 	{
-		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+		if (!keyDown(LShift))
 			GetGun()->_Aim = Aim::Neutral;
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		else if (keyDown(Up))
 			GetGun()->_Aim = Aim::DiagUp;
 	}
+
+	//	Update physics
+	GetVelocity()._Y += dt * Gravity;
+	GetLevel()->GetMap().ResolveTileCollision(this, dt);
 
 	//	Update Components
 	_Gun->GetPosition().Set(GetPosition()._X + _GunOffset._X, GetPosition()._Y + _GunOffset._Y);
