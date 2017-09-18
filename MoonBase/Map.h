@@ -4,6 +4,7 @@
 #include "Framework\Data\Grid.h"
 #include "SFML\Graphics.hpp"
 #include "Framework\Data\Pair.h"
+#include "Framework\Entities\Entity.h"
 
 #define CellWidth 32
 #define CellHeight 32
@@ -18,6 +19,7 @@ public:
 	int CalcCol(int worldx);
 	int CalcRow(int worldy);
 
+	bool ResolveTileCollision(Entity* ent, float dt);
 
 private:
 
