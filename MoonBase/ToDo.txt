@@ -8,9 +8,6 @@ If the player kills all of the robots they win. If the target object is destroye
 The player can switch weapons, regain health, use terrain/equipment and buy upgrades/supplies between waves.
 ----------------
 Prototype - basic implementation of core features
-- Player tracks state (LookLeft, WalkLeft, RunLeft, CrouchLeft, FallLeft, etc.)
-- Show gun on screen
-- Move gun with player
 - Aim gun
 - Fire bullets from gun
 - Kill bullets on count limit

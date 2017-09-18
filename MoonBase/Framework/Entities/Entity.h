@@ -20,6 +20,7 @@ public:
 	PairFloat& GetPosition();
 	PairFloat& GetVelocity();
 	PairFloat& GetSize();
+	float& GetHeading();
 
 	Graphic& GetGraphic();
 	Stats& GetStats();
@@ -37,9 +38,10 @@ private:
 
 	bool _Alive;
 
-	PairFloat	_Position;
-	PairFloat	_Velocity;
-	PairFloat	_Size;
+	PairFloat	_Position = PairFloat(0.f, 0.f);
+	PairFloat	_Velocity = PairFloat(0.f, 0.f);
+	PairFloat	_Size = PairFloat(1.f, 1.f);
+	float _Heading = 0.f;
 
 	Stats _Stats;
 	Graphic _Graphic;

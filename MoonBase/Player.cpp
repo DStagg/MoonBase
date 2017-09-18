@@ -141,10 +141,23 @@ void Player::Update(float dt)
 		else
 			GetPosition()._Y += dt * GetVelocity()._Y;
 	}
+
+	_Gun->GetPosition().Set(GetPosition()._X + _GunOffset._X, GetPosition()._Y + _GunOffset._Y);
+	_Gun->Update(dt);
 };
 
 void Player::Draw(sf::RenderWindow* rw)
 {
+	DebugDrawEntity(this, rw, sf::Color::Blue);
+	if (GetGun() != 0)
+		GetGun()->Draw(rw);
+};
 
-
+void Player::SetGun(Gun* g)
+{
+	_Gun = g;
+};
+Gun* Player::GetGun()
+{
+	return _Gun;
 };

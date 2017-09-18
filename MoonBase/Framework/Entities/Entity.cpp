@@ -23,6 +23,10 @@ PairFloat& Entity::GetSize()
 {
 	return _Size;
 };
+float& Entity::GetHeading()
+{
+	return _Heading;
+};
 //////////////////
 
 Graphic& Entity::GetGraphic()
