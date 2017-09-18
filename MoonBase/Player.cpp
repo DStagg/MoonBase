@@ -89,17 +89,17 @@ void Player::Update(float dt)
 
 void Player::Draw(sf::RenderWindow* rw)
 {
-	GetGraphic().GetSprPntr()->setPosition(floor(GetPosition()._X) + 100.f, floor(GetPosition()._Y));
-//	if (GetDirection() == Direction::East)
+	GetGraphic().GetSprPntr()->setPosition(floor(GetPosition()._X), floor(GetPosition()._Y));
+	if (GetDirection() == Direction::East)
 	{
 		rw->draw(*GetGraphic().GetSprPntr());
 		if (GetGun() != 0) GetGun()->Draw(rw);
 	}
-	//else
-	//{
-	//	if (GetGun() != 0) GetGun()->Draw(rw);
-	//	rw->draw(*GetGraphic().GetSprPntr());
-//	}
+	else
+	{
+		if (GetGun() != 0) GetGun()->Draw(rw);
+		rw->draw(*GetGraphic().GetSprPntr());
+	}
 
 	//DebugDrawEntity(this, rw, sf::Color::Blue);
 };
