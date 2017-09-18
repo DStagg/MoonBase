@@ -16,6 +16,7 @@ public:
 
 	Grid& GetTiles();
 
+	int GetTileFromWorld(float x, float y);
 	int CalcCol(int worldx);
 	int CalcRow(int worldy);
 

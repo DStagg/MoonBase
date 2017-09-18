@@ -27,18 +27,18 @@ void Player::HandleInput(sf::Event e)
 
 void Player::Update(float dt)
 {
+	//	Set variables
 	float WalkSpeed = 100.f;
 	float Jump = 100.f;
 
-	GetVelocity()._Y += dt * Gravity;
-
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::A)) && (!sf::Keyboard::isKeyPressed(sf::Keyboard::D)))
+	//	Handle input
+	if (keyDown(A) && !keyDown(D))
 	{
 		GetVelocity()._X = -WalkSpeed;
 		GetDirection() = Direction::West;
 		GetGun()->GetDirection() = Direction::West;
 	}
-	else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::D)) && (!sf::Keyboard::isKeyPressed(sf::Keyboard::A)))
+	else if (keyDown(D) && !keyDown(A))
 	{
 		GetVelocity()._X = WalkSpeed;
 		GetDirection() = Direction::East;
@@ -47,9 +47,11 @@ void Player::Update(float dt)
 	else
 		GetVelocity()._X = 0.f;
 
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W)) && (GetVelocity()._Y == dt * Gravity))
+	if (keyDown(W) && (GetLevel()->GetMap().GetTileFromWorld(GetPosition()._X + (GetSize()._X / 2.f),GetPosition()._Y + GetSize()._Y) == 1))
 		GetVelocity()._Y = -Jump;
-
+	
+	//	Update physics
+	GetVelocity()._Y += dt * Gravity;
 	GetLevel()->GetMap().ResolveTileCollision(this, dt);
 
 	if ((GetGun()->_Aim == Aim::Up) && (!sf::Keyboard::isKeyPressed(sf::Keyboard::Up)))
@@ -77,6 +79,8 @@ void Player::Update(float dt)
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 			GetGun()->_Aim = Aim::DiagUp;
 	}
+
+	//	Update Components
 	_Gun->GetPosition().Set(GetPosition()._X + _GunOffset._X, GetPosition()._Y + _GunOffset._Y);
 	_Gun->Update(dt);
 	GetGraphic().Swap("Player" + IntToString(GetDirection()));

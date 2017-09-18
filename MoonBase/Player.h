@@ -5,6 +5,8 @@
 #include "Framework\Utility\Utility.h"
 #include "Gun.h"
 
+#define keyDown(x) sf::Keyboard::isKeyPressed(sf::Keyboard::x)
+
 class Player : public Entity
 {
 public:

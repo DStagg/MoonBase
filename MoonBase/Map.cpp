@@ -23,6 +23,10 @@ void DebugGenMap(Map* map, int width, int height)
 
 };
 
+int Map::GetTileFromWorld(float x, float y)
+{
+	return GetTiles().GetCell(CalcCol(x), CalcRow(y));
+};
 int Map::CalcCol(int worldx)
 {
 	return (worldx - (worldx % CellWidth)) / CellWidth;
