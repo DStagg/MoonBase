@@ -4,14 +4,7 @@
 #include "Framework\Entities\Entity.h"
 #include "Framework\Utility\Utility.h"
 
-enum Aim
-{
-	Neutral = 0,
-	Up,
-	Down,
-	DiagUp,
-	DiagDown
-};
+
 
 class Gun : public Entity
 {
@@ -22,9 +15,21 @@ public:
 	void Update(float dt);
 	void Draw(sf::RenderWindow* rw);
 
-	int _Aim = Neutral;
+	std::string CalcAnim();
+
+	int& GetAim();
+	enum Aim
+	{
+		Neutral = 0,
+		Up,
+		Down,
+		DiagUp,
+		DiagDown
+	};
 
 private:
+
+	int _Aim = Neutral;
 
 };
 

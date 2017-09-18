@@ -50,30 +50,30 @@ void Player::Update(float dt)
 	if (keyDown(W) && (GetLevel()->GetMap().GetTileFromWorld(GetPosition()._X + (GetSize()._X / 2.f),GetPosition()._Y + GetSize()._Y) == 1))
 		GetVelocity()._Y = -Jump;
 	
-	if ((GetGun()->_Aim == Aim::Up) && (!keyDown(Up)))
-		GetGun()->_Aim = Aim::Neutral;
-	else if ((GetGun()->_Aim == Aim::Down) && (!keyDown(Down)))
-		GetGun()->_Aim = Aim::Neutral;
-	else if (GetGun()->_Aim == Aim::Neutral)
+	if ((GetGun()->GetAim() == Gun::Aim::Up) && (!keyDown(Up)))
+		GetGun()->GetAim() = Gun::Aim::Neutral;
+	else if ((GetGun()->GetAim() == Gun::Aim::Down) && (!keyDown(Down)))
+		GetGun()->GetAim() = Gun::Aim::Neutral;
+	else if (GetGun()->GetAim() == Gun::Aim::Neutral)
 	{
 		if (keyDown(LShift))
-			GetGun()->_Aim = Aim::DiagUp;
+			GetGun()->GetAim() = Gun::Aim::DiagUp;
 		else if (keyDown(Up))
-			GetGun()->_Aim = Aim::Up;
+			GetGun()->GetAim() = Gun::Aim::Up;
 	}
-	else if (GetGun()->_Aim == Aim::DiagUp)
+	else if (GetGun()->GetAim() == Gun::Aim::DiagUp)
 	{
 		if (!keyDown(LShift))
-			GetGun()->_Aim = Aim::Neutral;
+			GetGun()->GetAim() = Gun::Aim::Neutral;
 		else if (keyDown(Down))
-			GetGun()->_Aim = Aim::DiagDown;
+			GetGun()->GetAim() = Gun::Aim::DiagDown;
 	}
-	else if (GetGun()->_Aim == Aim::DiagDown)
+	else if (GetGun()->GetAim() == Gun::Aim::DiagDown)
 	{
 		if (!keyDown(LShift))
-			GetGun()->_Aim = Aim::Neutral;
+			GetGun()->GetAim() = Gun::Aim::Neutral;
 		else if (keyDown(Up))
-			GetGun()->_Aim = Aim::DiagUp;
+			GetGun()->GetAim() = Gun::Aim::DiagUp;
 	}
 
 	//	Update physics
@@ -89,19 +89,19 @@ void Player::Update(float dt)
 
 void Player::Draw(sf::RenderWindow* rw)
 {
-	GetGraphic().GetSprPntr()->setPosition(floor(GetPosition()._X), floor(GetPosition()._Y));
-	if (GetDirection() == Direction::East)
+	GetGraphic().GetSprPntr()->setPosition(floor(GetPosition()._X) + 100.f, floor(GetPosition()._Y));
+//	if (GetDirection() == Direction::East)
 	{
 		rw->draw(*GetGraphic().GetSprPntr());
 		if (GetGun() != 0) GetGun()->Draw(rw);
 	}
-	else
-	{
-		if (GetGun() != 0) GetGun()->Draw(rw);
-		rw->draw(*GetGraphic().GetSprPntr());
-	}
+	//else
+	//{
+	//	if (GetGun() != 0) GetGun()->Draw(rw);
+	//	rw->draw(*GetGraphic().GetSprPntr());
+//	}
 
-	DebugDrawEntity(this, rw, sf::Color::Blue);
+	//DebugDrawEntity(this, rw, sf::Color::Blue);
 };
 
 void Player::SetGun(Gun* g)
