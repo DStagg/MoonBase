@@ -8,6 +8,18 @@
 
 #include "EntityComponents.h"
 
+enum Direction
+{
+	North = 0,
+	NorthEast,
+	East,
+	SouthEast,
+	South,
+	SouthWest,
+	West,
+	NorthWest
+};
+
 class Level;
 
 class Entity
@@ -21,6 +33,7 @@ public:
 	PairFloat& GetVelocity();
 	PairFloat& GetSize();
 	float& GetHeading();
+	int& GetDirection();
 
 	Graphic& GetGraphic();
 	Stats& GetStats();
@@ -42,6 +55,7 @@ private:
 	PairFloat	_Velocity = PairFloat(0.f, 0.f);
 	PairFloat	_Size = PairFloat(1.f, 1.f);
 	float _Heading = 0.f;
+	int _Direction = Direction::North;
 
 	Stats _Stats;
 	Graphic _Graphic;

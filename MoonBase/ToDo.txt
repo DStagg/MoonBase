@@ -54,3 +54,25 @@ Complete - polish, polish, polish.
 Wish List
  - Randomise enemy health/dmg within a small margin
  - Rare chance of "Elite" enemies spawning - greater damage/health/reward
+
+
+
+ template <class T>
+ struct Component
+ {
+	std::string _Type;
+	T _Data;
+ };
+
+ class Ent
+ {
+ public:
+	T GetComponent(std::string type)
+	{
+		//	... loop components ...
+		if (_Component[id]._Type == type)
+			return _Component[id]._Data;
+		//	... if no such component is found ...
+		return T();
+	}
+};

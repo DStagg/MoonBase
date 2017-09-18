@@ -11,6 +11,7 @@ public:
 
 	Player(Level* lvl);
 
+	void HandleInput(sf::Event e);
 	void Update(float dt);
 	void Draw(sf::RenderWindow* rw);
 
@@ -21,7 +22,7 @@ private:
 
 	Gun* _Gun = 0;
 	PairFloat _GunOffset = PairFloat(15.f, 15.f);
-
+	
 };
 
 #endif

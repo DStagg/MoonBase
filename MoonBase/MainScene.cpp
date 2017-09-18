@@ -17,8 +17,21 @@ void MainScene::Begin()
 	_Level->GetPlayer()->GetPosition().Set(100.f, 200.f);
 
 	_Level->GetPlayer()->SetGun(new Gun(_Level));
-	_Level->GetPlayer()->GetGun()->GetSize().Set(50.f, 10.f);
+	_Level->GetPlayer()->GetGun()->GetSize().Set(32.f, 16.f);
 
+	_ImgMan.LoadTextureFromFile("Player", "Player.png");
+	_ImgMan.LoadTextureFromFile("Gun", "Gun.png");
+	GenPlayerAnims(_ImgMan);
+	_Level->GetPlayer()->GetGraphic().SetSprite(sf::Sprite(*_ImgMan.GetTexturePntr("Player")));
+	_Level->GetPlayer()->GetGun()->GetGraphic().SetSprite(sf::Sprite(*_ImgMan.GetTexturePntr("Gun")));
+	
+	for (int i = Direction::North; i <= Direction::NorthWest; i++)
+	{
+		_Level->GetPlayer()->GetGraphic().AddAnimation("Player" + IntToString(i), _ImgMan.GetAnimation("Player" + IntToString(i)));
+		_Level->GetPlayer()->GetGun()->GetGraphic().AddAnimation("Gun" + IntToString(i), _ImgMan.GetAnimation("Gun" + IntToString(i)));
+	}
+
+	
 	DebugGenMap(&_Level->GetMap(), 20, 10);
 };
 void MainScene::End()
@@ -68,4 +81,20 @@ void MainScene::DrawScreen()
 			_Level->GetPlayer()->Draw(_Window);
 	}
 
+};
+
+void GenPlayerAnims(ImageManager& img)
+{
+	for (int i = Direction::North; i <= Direction::NorthWest; i++)
+	{
+		AnimationFrame frame(i * 32.f, 0.f, 32.f, 64.f, 1.f);
+		Animation anim;
+		anim._Frames.push_back(frame);
+		img.AddAnimation("Player" + IntToString(i), anim);
+
+		AnimationFrame gframe(i * 32.f, 0.f, 32.f, 16.f, 1.f);
+		Animation ganim;
+		ganim._Frames.push_back(gframe);
+		img.AddAnimation("Gun" + IntToString(i), ganim);
+	}
 };

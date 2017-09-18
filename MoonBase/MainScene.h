@@ -25,7 +25,9 @@ private:
 
 	sf::RenderWindow* _Window = 0;
 	Level* _Level = 0;
-
+	ImageManager _ImgMan;
 };
+
+void GenPlayerAnims(ImageManager& img);
 
 #endif

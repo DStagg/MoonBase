@@ -27,6 +27,10 @@ float& Entity::GetHeading()
 {
 	return _Heading;
 };
+int& Entity::GetDirection()
+{
+	return _Direction;
+};
 //////////////////
 
 Graphic& Entity::GetGraphic()
