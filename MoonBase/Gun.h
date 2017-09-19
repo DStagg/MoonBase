@@ -15,6 +15,9 @@ public:
 
 	bool Shoot();
 
+	PairFloat CalcMuzzle();
+	PairFloat CalcTrajectory();
+
 	std::string CalcAnim();
 
 	int& GetAim();

@@ -71,6 +71,9 @@ void MainScene::Update(float dt)
 
 	if ((_Level != 0) && (_Level->GetPlayer() != 0))
 		_Level->GetPlayer()->Update(dt);
+
+	for (int i = 0; i < _Level->GetBullets().CountEnts(); i++)
+		_Level->GetBullets().GetEnt(i)->Update(dt);
 };
 void MainScene::DrawScreen()
 {
@@ -79,6 +82,8 @@ void MainScene::DrawScreen()
 		DebugDrawMap(&_Level->GetMap(), _Window, sf::Color::Magenta);
 		if (_Level->GetPlayer() != 0)
 			_Level->GetPlayer()->Draw(_Window);
+		for (int i = 0; i < _Level->GetBullets().CountEnts(); i++)
+			DebugDrawEntity(_Level->GetBullets().GetEnt(i), _Window, sf::Color::White);
 	}
 
 };

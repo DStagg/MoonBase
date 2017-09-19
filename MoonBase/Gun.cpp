@@ -1,4 +1,5 @@
 #include "Gun.h"
+#include "Level.h"
 
 Gun::Gun(Level* lvl) : Entity(lvl)
 {
@@ -29,9 +30,38 @@ bool Gun::Shoot()
 	{
 		_ShootTimer = 0.f;
 		//	Shoot
+		BasicEnt* temp = new BasicEnt(GetLevel());
+		temp->GetPosition() = CalcMuzzle();
+		PairFloat traj = CalcTrajectory();
+		traj.Set(traj._X * 100.f, traj._Y * 100.f);
+		temp->GetVelocity() = traj;
+		GetLevel()->GetBullets().AddEnt(temp);
 		return true;
 	}
 	return false;
+};
+
+PairFloat Gun::CalcMuzzle()
+{
+	PairFloat traj = CalcTrajectory();
+
+	return PairFloat( GetPosition()._X + (GetSize()._X * traj._X) , GetPosition()._Y + (GetSize()._X * traj._Y));
+};
+
+PairFloat Gun::CalcTrajectory()
+{
+	if (_Aim == Aim::Up)
+		return PairFloat(0.f, -1.f);
+	else if (_Aim == Aim::DiagUp)
+		return (GetDirection() == Direction::West) ? PairFloat(sin(DegreeToRad(225.f)), cos(DegreeToRad(225.f))) : PairFloat(sin(DegreeToRad(135.f)), cos(DegreeToRad(135.f)));
+	else if (_Aim == Aim::Neutral)
+		return (GetDirection() == Direction::West) ? PairFloat(-1.f, 0.f) : PairFloat(1.f, 0.f);
+	else if (_Aim == Aim::DiagDown)
+		return (GetDirection() == Direction::West) ? PairFloat(sin(DegreeToRad(315.f)), cos(DegreeToRad(315.f))) : PairFloat(sin(DegreeToRad(45.f)), cos(DegreeToRad(45.f)));
+	else if (_Aim == Aim::Down)
+		return PairFloat(0.f, 1.f);
+
+	return PairFloat(0.f, 0.f);
 };
 
 void Gun::Draw(sf::RenderWindow* rw)
