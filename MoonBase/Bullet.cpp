@@ -10,9 +10,6 @@ Bullet::Bullet(Level* lvl, PairFloat pos, PairFloat vel, PairFloat size) : Entit
 
 void Bullet::Update(float dt)
 {
-	GetPosition()._X += GetVelocity()._X * dt;
-	GetPosition()._Y += GetVelocity()._Y * dt;
-
 	if (GetLevel()->GetMap().ResolveTileCollision(this, dt))
 		Alive() = false;
 

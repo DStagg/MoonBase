@@ -85,7 +85,7 @@ void MainScene::DrawScreen()
 		if (_Level->GetPlayer() != 0)
 			_Level->GetPlayer()->Draw(_Window);
 		for (int i = 0; i < _Level->GetBullets().CountEnts(); i++)
-			DebugDrawEntity(_Level->GetBullets().GetEnt(i), _Window, sf::Color::White);
+			_Level->GetBullets().GetEnt(i)->Draw(_Window);
 	}
 
 };
