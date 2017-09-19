@@ -22,59 +22,76 @@ enum Direction
 
 class Level;
 
-class Entity
+class BaseEntity
 {
 public:
 
-	Entity(Level* lvl);
-	~Entity();
+	BaseEntity(Level* lvl);
 
 	PairFloat& GetPosition();
 	PairFloat& GetVelocity();
 	PairFloat& GetSize();
-	float& GetHeading();
-	int& GetDirection();
-
-	Graphic& GetGraphic();
-	Stats& GetStats();
-
-	void SetAlive(bool b);
-	bool GetAlive();
 
 	virtual void Update(float dt) = 0;
 	virtual void Draw(sf::RenderWindow* rw) = 0;
 
 	void SetLevel(Level* lvl);
 	Level* GetLevel();
-	
-private:
 
-	bool _Alive;
+	bool& Alive();
+
+private:
 
 	PairFloat	_Position = PairFloat(0.f, 0.f);
 	PairFloat	_Velocity = PairFloat(0.f, 0.f);
 	PairFloat	_Size = PairFloat(1.f, 1.f);
+
+	Level* _Level = 0;
+	bool _Alive = true;
+};
+
+AABB GenBoundBox(BaseEntity* ent);
+void DebugDrawEntity(BaseEntity* ent, sf::RenderWindow* target, sf::Color col = sf::Color::Red);
+
+////////////////////////////////////
+
+class Entity : public BaseEntity
+{
+public:
+
+	Entity(Level* lvl);
+
+	float& GetHeading();
+	int& GetDirection();
+
+	Graphic& GetGraphic();
+
+private:
+
 	float _Heading = 0.f;
 	int _Direction = Direction::North;
 
-	Stats _Stats;
 	Graphic _Graphic;
 	
-	Level* _Level;
 };
 
-class BasicEnt : public Entity
+////////////////////////////////////
+
+class BasicEnt : public BaseEntity
 {
 public:
 
 	BasicEnt(Level* lvl);
+	BasicEnt(Level* lvl, PairFloat pos, PairFloat vel, PairFloat size);
 
 	void Update(float dt);
 	void Draw(sf::RenderWindow* rw);
 
 };
 
-class SFXEnt : public BasicEnt
+////////////////////////////////////
+
+class SFXEnt : public Entity
 {
 public:
 
@@ -86,7 +103,7 @@ private:
 
 };
 
-AABB GenBoundBox(Entity* ent);
+////////////////////////////////////
 
 class EntList
 {
@@ -95,18 +112,16 @@ public:
 	EntList();
 	~EntList();
 
-	void AddEnt(Entity* ent);
-	void DelEnt(Entity* ent);
+	void AddEnt(BaseEntity* ent);
+	void DelEnt(BaseEntity* ent);
 	void Cull(int limit);
 
 	int CountEnts();
-	Entity* GetEnt(int i);
+	BaseEntity* GetEnt(int i);
 
 private:
 
-	std::vector<Entity*> _Entities;
+	std::vector<BaseEntity*> _Entities;
 };
-
-void DebugDrawEntity(Entity* ent, sf::RenderWindow* target, sf::Color col = sf::Color::Red);
 
 #endif
