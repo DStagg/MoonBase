@@ -24,3 +24,12 @@ EntList& Level::GetBullets()
 {
 	return _Bullets;
 };
+
+Goal* Level::GetGoal()
+{
+	return _Goal;
+};
+void Level::SetGoal(Goal* g)
+{
+	_Goal = g;
+};

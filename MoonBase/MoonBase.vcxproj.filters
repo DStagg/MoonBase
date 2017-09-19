@@ -86,6 +86,9 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Goal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainScene.h">
@@ -149,6 +152,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Goal.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

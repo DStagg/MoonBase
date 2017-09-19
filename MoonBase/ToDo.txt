@@ -8,7 +8,6 @@ If the player kills all of the robots they win. If the target object is destroye
 The player can switch weapons, regain health, use terrain/equipment and buy upgrades/supplies between waves.
 ----------------
 Prototype - basic implementation of core features
-- Show target object on screen
 - Show target object health on GUI
 - Show player health on GUI
 - Show enemy on screen

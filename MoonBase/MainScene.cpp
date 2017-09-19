@@ -19,6 +19,11 @@ void MainScene::Begin()
 	_Level->GetPlayer()->SetGun(new Gun(_Level));
 	_Level->GetPlayer()->GetGun()->GetSize().Set(32.f, 16.f);
 
+	Goal* g = new Goal(_Level);
+	g->GetPosition().Set(100.f, 100.f);
+	g->GetSize().Set(50.f, 50.f);
+	_Level->SetGoal(g);
+
 	_ImgMan.LoadTextureFromFile("Player", "Player.png");
 	_ImgMan.LoadTextureFromFile("Gun", "Gun.png");
 	GenPlayerAnims(_ImgMan);
@@ -69,6 +74,8 @@ void MainScene::Update(float dt)
 				
 	}
 
+	_Level->GetGoal()->Update(dt);
+
 	if ((_Level != 0) && (_Level->GetPlayer() != 0))
 		_Level->GetPlayer()->Update(dt);
 
@@ -86,6 +93,7 @@ void MainScene::DrawScreen()
 			_Level->GetPlayer()->Draw(_Window);
 		for (int i = 0; i < _Level->GetBullets().CountEnts(); i++)
 			_Level->GetBullets().GetEnt(i)->Draw(_Window);
+		_Level->GetGoal()->Draw(_Window);
 	}
 
 };
