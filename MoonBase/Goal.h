@@ -2,8 +2,10 @@
 #define GOAL_H
 
 #include "Framework\Entities\Entity.h"
+#include "Health.h"
+#include <iostream>
 
-class Goal : public BaseEntity
+class Goal : public BaseEntity , public Health
 {
 public:
 
@@ -11,6 +13,8 @@ public:
 
 	void Update(float dt);
 	void Draw(sf::RenderWindow* rw);
+
+	void OnHurt(int dmg);
 
 private:
 

@@ -4,6 +4,7 @@
 #include "Framework\Entities\Entity.h"
 #include "Framework\Utility\Utility.h"
 #include "Gun.h"
+#include "Health.h"
 
 #define ShootKey Space
 #define MoveLeftKey A
@@ -15,7 +16,7 @@
 
 #define keyDown(x) sf::Keyboard::isKeyPressed(sf::Keyboard::x)
 
-class Player : public Entity
+class Player : public Entity, public Health
 {
 public:
 
@@ -24,6 +25,7 @@ public:
 	void HandleInput(sf::Event e);
 	void Update(float dt);
 	void Draw(sf::RenderWindow* rw);
+	void OnHurt(int dmg);
 
 	Gun* GetGun();
 	void SetGun(Gun* g);

@@ -94,6 +94,22 @@ void MainScene::DrawScreen()
 		for (int i = 0; i < _Level->GetBullets().CountEnts(); i++)
 			_Level->GetBullets().GetEnt(i)->Draw(_Window);
 		_Level->GetGoal()->Draw(_Window);
+
+		sf::Font f;
+		f.loadFromFile("Roboto-Regular.ttf");
+
+		sf::Text t1;
+		t1.setString("Player Health: " + IntToString(_Level->GetPlayer()->GetHP()) + " of " + IntToString(_Level->GetPlayer()->GetMaxHP()));
+		t1.setFont(f);
+		t1.setPosition(0.f, 0.f);
+		_Window->draw(t1);
+
+		sf::Text t2;
+		t2.setString("Core Health: " + IntToString(_Level->GetGoal()->GetHP()) + " of " + IntToString(_Level->GetGoal()->GetMaxHP()));
+		t2.setFont(f);
+		t2.setPosition(0.f, 50.f);
+		_Window->draw(t2);
+
 	}
 
 };

@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "Level.h"
 
-Player::Player(Level* lvl) : Entity(lvl)
+Player::Player(Level* lvl) : Entity(lvl), Health(50,50)
 {
 	GetDirection() = Direction::East;
 };
@@ -105,6 +105,12 @@ void Player::Draw(sf::RenderWindow* rw)
 	}
 
 	//DebugDrawEntity(this, rw, sf::Color::Blue);
+};
+
+void Player::OnHurt(int dmg)
+{
+
+
 };
 
 void Player::SetGun(Gun* g)
