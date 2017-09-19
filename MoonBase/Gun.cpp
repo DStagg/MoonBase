@@ -29,13 +29,8 @@ bool Gun::Shoot()
 	if (_ShootTimer >= _ShootDelay)
 	{
 		_ShootTimer = 0.f;
-		//	Shoot
-		BasicEnt* temp = new BasicEnt(GetLevel());
-		temp->GetPosition() = CalcMuzzle();
 		PairFloat traj = CalcTrajectory();
-		traj.Set(traj._X * 100.f, traj._Y * 100.f);
-		temp->GetVelocity() = traj;
-		GetLevel()->GetBullets().AddEnt(temp);
+		GetLevel()->GetBullets().AddEnt(new Bullet(GetLevel(), CalcMuzzle(), PairFloat(traj._X * 100.f, traj._Y * 100.f) , PairFloat(25.f, 25.f)));
 		return true;
 	}
 	return false;

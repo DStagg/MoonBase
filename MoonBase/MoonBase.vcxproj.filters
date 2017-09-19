@@ -83,6 +83,9 @@
     <ClCompile Include="Gun.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainScene.h">
@@ -143,6 +146,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Gun.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,6 +3,7 @@
 
 #include "Framework\Entities\Entity.h"
 #include "Framework\Utility\Utility.h"
+#include "Bullet.h"
 
 class Gun : public Entity
 {
