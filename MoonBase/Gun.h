@@ -4,8 +4,6 @@
 #include "Framework\Entities\Entity.h"
 #include "Framework\Utility\Utility.h"
 
-
-
 class Gun : public Entity
 {
 public:
@@ -14,6 +12,8 @@ public:
 
 	void Update(float dt);
 	void Draw(sf::RenderWindow* rw);
+
+	bool Shoot();
 
 	std::string CalcAnim();
 
@@ -30,6 +30,9 @@ public:
 private:
 
 	int _Aim = Neutral;
+
+	float _ShootTimer = 0.f;
+	float _ShootDelay = 0.2f;
 
 };
 

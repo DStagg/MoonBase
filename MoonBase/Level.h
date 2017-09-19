@@ -12,13 +12,14 @@ public:
 
 	void SetPlayer(Player* player);
 	Player* GetPlayer();
-
 	Map& GetMap();
+	EntList& GetBullets();
 
 private:
 
 	Player* _Player = 0;
 	Map _Map;
+	EntList _Bullets;
 };
 
 #endif

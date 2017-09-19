@@ -32,13 +32,13 @@ void Player::Update(float dt)
 	float Jump = 100.f;
 
 	//	Handle input
-	if (keyDown(A) && !keyDown(D))
+	if (keyDown(MoveLeftKey) && !keyDown(MoveRightKey))
 	{
 		GetVelocity()._X = -WalkSpeed;
 		GetDirection() = Direction::West;
 		GetGun()->GetDirection() = Direction::West;
 	}
-	else if (keyDown(D) && !keyDown(A))
+	else if (keyDown(MoveRightKey) && !keyDown(MoveLeftKey))
 	{
 		GetVelocity()._X = WalkSpeed;
 		GetDirection() = Direction::East;
@@ -47,34 +47,37 @@ void Player::Update(float dt)
 	else
 		GetVelocity()._X = 0.f;
 
-	if (keyDown(W) && (GetLevel()->GetMap().GetTileFromWorld(GetPosition()._X + (GetSize()._X / 2.f),GetPosition()._Y + GetSize()._Y) == 1))
+	if (keyDown(JumpKey) && (GetLevel()->GetMap().GetTileFromWorld(GetPosition()._X + (GetSize()._X / 2.f),GetPosition()._Y + GetSize()._Y) == 1))
 		GetVelocity()._Y = -Jump;
 	
-	if ((GetGun()->GetAim() == Gun::Aim::Up) && (!keyDown(Up)))
+	if ((GetGun()->GetAim() == Gun::Aim::Up) && (!keyDown(AimUpKey)))
 		GetGun()->GetAim() = Gun::Aim::Neutral;
-	else if ((GetGun()->GetAim() == Gun::Aim::Down) && (!keyDown(Down)))
+	else if ((GetGun()->GetAim() == Gun::Aim::Down) && (!keyDown(AimDownKey)))
 		GetGun()->GetAim() = Gun::Aim::Neutral;
 	else if (GetGun()->GetAim() == Gun::Aim::Neutral)
 	{
-		if (keyDown(LShift))
+		if (keyDown(ToggleAimKey))
 			GetGun()->GetAim() = Gun::Aim::DiagUp;
-		else if (keyDown(Up))
+		else if (keyDown(AimUpKey))
 			GetGun()->GetAim() = Gun::Aim::Up;
 	}
 	else if (GetGun()->GetAim() == Gun::Aim::DiagUp)
 	{
-		if (!keyDown(LShift))
+		if (!keyDown(ToggleAimKey))
 			GetGun()->GetAim() = Gun::Aim::Neutral;
-		else if (keyDown(Down))
+		else if (keyDown(AimDownKey))
 			GetGun()->GetAim() = Gun::Aim::DiagDown;
 	}
 	else if (GetGun()->GetAim() == Gun::Aim::DiagDown)
 	{
-		if (!keyDown(LShift))
+		if (!keyDown(ToggleAimKey))
 			GetGun()->GetAim() = Gun::Aim::Neutral;
-		else if (keyDown(Up))
+		else if (keyDown(AimUpKey))
 			GetGun()->GetAim() = Gun::Aim::DiagUp;
 	}
+
+	if (keyDown(ShootKey))
+		GetGun()->Shoot();
 
 	//	Update physics
 	GetVelocity()._Y += dt * Gravity;

@@ -5,6 +5,14 @@
 #include "Framework\Utility\Utility.h"
 #include "Gun.h"
 
+#define ShootKey Space
+#define MoveLeftKey A
+#define MoveRightKey D
+#define AimUpKey W
+#define AimDownKey S
+#define ToggleAimKey LShift
+#define JumpKey Up
+
 #define keyDown(x) sf::Keyboard::isKeyPressed(sf::Keyboard::x)
 
 class Player : public Entity

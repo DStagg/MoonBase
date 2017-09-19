@@ -20,6 +20,18 @@ void Gun::Update(float dt)
 
 	GetGraphic().Play(dt);
 	
+	_ShootTimer += dt;
+};
+
+bool Gun::Shoot()
+{
+	if (_ShootTimer >= _ShootDelay)
+	{
+		_ShootTimer = 0.f;
+		//	Shoot
+		return true;
+	}
+	return false;
 };
 
 void Gun::Draw(sf::RenderWindow* rw)

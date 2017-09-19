@@ -19,3 +19,8 @@ Map& Level::GetMap()
 {
 	return _Map;
 };
+
+EntList& Level::GetBullets()
+{
+	return _Bullets;
+};
