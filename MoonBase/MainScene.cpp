@@ -74,6 +74,8 @@ void MainScene::Update(float dt)
 
 	for (int i = 0; i < _Level->GetBullets().CountEnts(); i++)
 		_Level->GetBullets().GetEnt(i)->Update(dt);
+
+	_Level->GetBullets().Cull(50);
 };
 void MainScene::DrawScreen()
 {
