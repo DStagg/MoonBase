@@ -53,6 +53,16 @@ void DebugDrawMap(Map* map, sf::RenderWindow*rw, sf::Color solid)
 
 bool Map::ResolveTileCollision(Entity* ent, float dt)
 {
+	if (ResolveTileCollisionX(ent, dt))
+	{
+		ResolveTileCollisionY(ent, dt);
+		return true;
+	}
+	return ResolveTileCollisionY(ent, dt);
+};
+
+bool Map::ResolveTileCollisionX(Entity* ent, float dt)
+{
 	bool result = false;
 	AABB bounds = GenBoundBox(ent);
 	//	Resolve x-coordinate movement
@@ -114,7 +124,12 @@ bool Map::ResolveTileCollision(Entity* ent, float dt)
 		else
 			ent->GetPosition()._X += dt * ent->GetVelocity()._X;
 	}
-	bounds = GenBoundBox(ent);
+	return result;
+};
+bool Map::ResolveTileCollisionY(Entity* ent, float dt)
+{
+	bool result = false;
+	AABB bounds = GenBoundBox(ent);
 	//	Resolve y-coordinate movement
 	if (ent->GetVelocity()._Y != 0.f)
 	{

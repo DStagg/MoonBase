@@ -11,11 +11,17 @@ void Enemy::Update(float dt)
 {
 	GetVelocity()._Y += dt * Gravity;
 
-	if (GetVelocity()._X == 0.f)
-		GetVelocity()._X = -100.f;
-	float vel = GetVelocity()._X;
-	if (GetLevel()->GetMap().ResolveTileCollision(this, dt))
-		GetVelocity()._X = -vel;
+	if (_Type == Type::Walker)
+	{
+		if (GetVelocity()._X == 0.f)
+			GetVelocity()._X = -100.f;
+		float vel = GetVelocity()._X;
+		if (GetLevel()->GetMap().ResolveTileCollisionX(this, dt))
+			GetVelocity()._X = -vel;
+		GetLevel()->GetMap().ResolveTileCollisionY(this, dt);
+	}
+	else
+		GetLevel()->GetMap().ResolveTileCollision(this, dt);
 };
 
 void Enemy::Draw(sf::RenderWindow* rw)

@@ -21,6 +21,8 @@ public:
 	int CalcRow(int worldy);
 
 	bool ResolveTileCollision(Entity* ent, float dt);
+	bool ResolveTileCollisionX(Entity* ent, float dt);
+	bool ResolveTileCollisionY(Entity* ent, float dt);
 
 private:
 
