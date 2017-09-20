@@ -8,8 +8,6 @@ If the player kills all of the robots they win. If the target object is destroye
 The player can switch weapons, regain health, use terrain/equipment and buy upgrades/supplies between waves.
 ----------------
 Prototype - basic implementation of core features
-- Show enemy on screen
-- Collide enemy with tiles
 - Give enemy basic walker AI (e.g. goomba)
 - Generate path to target object w/ djestkra (or whatever it's called)
 - Add debug option to draw djestkra path

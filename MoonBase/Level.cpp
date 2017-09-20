@@ -25,6 +25,11 @@ EntList& Level::GetBullets()
 	return _Bullets;
 };
 
+EntList& Level::GetEnemies()
+{
+	return _Enemies;
+};
+
 Goal* Level::GetGoal()
 {
 	return _Goal;

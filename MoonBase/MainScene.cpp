@@ -19,6 +19,10 @@ void MainScene::Begin()
 	_Level->GetPlayer()->SetGun(new Gun(_Level));
 	_Level->GetPlayer()->GetGun()->GetSize().Set(32.f, 16.f);
 
+	Enemy* e = new Enemy(_Level, Enemy::Type::Walker);
+	e->GetPosition().Set(300.f, 200.f);
+	_Level->GetEnemies().AddEnt(e);
+
 	Goal* g = new Goal(_Level);
 	g->GetPosition().Set(100.f, 100.f);
 	g->GetSize().Set(50.f, 50.f);
@@ -82,6 +86,9 @@ void MainScene::Update(float dt)
 	for (int i = 0; i < _Level->GetBullets().CountEnts(); i++)
 		_Level->GetBullets().GetEnt(i)->Update(dt);
 
+	for (int i = 0; i < _Level->GetEnemies().CountEnts(); i++)
+		_Level->GetEnemies().GetEnt(i)->Update(dt);
+
 	_Level->GetBullets().Cull(50);
 };
 void MainScene::DrawScreen()
@@ -93,6 +100,8 @@ void MainScene::DrawScreen()
 			_Level->GetPlayer()->Draw(_Window);
 		for (int i = 0; i < _Level->GetBullets().CountEnts(); i++)
 			_Level->GetBullets().GetEnt(i)->Draw(_Window);
+		for (int i = 0; i < _Level->GetEnemies().CountEnts(); i++)
+			_Level->GetEnemies().GetEnt(i)->Draw(_Window);
 		_Level->GetGoal()->Draw(_Window);
 
 		sf::Font f;
